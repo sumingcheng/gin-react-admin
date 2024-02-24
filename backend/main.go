@@ -1,20 +1,15 @@
 package main
 
 import (
-	"backend/api"
+	"backend/router"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-
-	r.POST("/register", api.Register)
-	r.POST("/login", api.Login)
-	r.POST("/changePassword", api.ChangePassword)
-
-	err := r.Run()
-
-	if err != nil {
-		return
+	// 用户相关路由
+	router.UserRoutes(r)
+	if err := r.Run(); err != nil {
+		panic(err)
 	}
 }

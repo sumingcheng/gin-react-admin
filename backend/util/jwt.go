@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-var jwtKey = []byte("your_secret_key") // 使用自定义密钥
+var jwtKey = []byte("everyday996") // 使用自定义密钥
 
 type Claims struct {
 	Username string `json:"username"`
@@ -26,4 +26,16 @@ func GenerateJWT(username string) (string, error) {
 	tokenString, err := token.SignedString(jwtKey)
 
 	return tokenString, err
+}
+
+// ParseToken 解析JWT令牌
+func ParseToken(tokenString string) (*Claims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
+		return claims, nil
+	} else {
+		return nil, err
+	}
 }
