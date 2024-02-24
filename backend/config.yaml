@@ -1,1 +1,9 @@
-database_dsn: "root:GoGin123!@tcp(127.0.0.1:3306)/adminDB?charset=utf8mb4&parseTime=True&loc=Local"
+database:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "GoGin123!"
+  name: "adminDB"
+  charset: "utf8mb4"
+  parseTime: "True"
+  loc: "Local"
