@@ -7,3 +7,6 @@ database:
   charset: "utf8mb4"
   parseTime: "True"
   loc: "Local"
+
+gin:
+  port: "33333" 

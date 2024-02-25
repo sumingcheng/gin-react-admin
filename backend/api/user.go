@@ -9,12 +9,15 @@ import (
 	"net/http"
 )
 
-// Register @Summary 注册新用户
+// Register
+// @Summary 注册新用户
 // @Description 用户注册。
 // @Tags 用户
 // @Accept  json
 // @Produce  json
-// @Param   user     body    model.User     true        "用户信息"
+// @Param   username     body    string     true        "用户名"
+// @Param   password     body    string     true        "密码"
+// @Param   email        body    string     true        "邮箱"
 // @Success 200 {object} map[string]interface{} "message:注册成功"
 // @Failure 400 {object} map[string]interface{} "error:错误信息"
 // @Router /register [post]
@@ -39,6 +42,17 @@ func Register(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Registration successful"})
 }
 
+// Login
+// @Summary 用户登录
+// @Description 用户登录，成功返回 JWT 令牌。
+// @Tags 用户
+// @Accept  json
+// @Produce  json
+// @Param   username     body    string     true        "用户名"
+// @Param   password     body    string     true        "密码"
+// @Success 200 {object} map[string]interface{} "token:JWT令牌"
+// @Failure 401 {object} map[string]interface{} "error:认证失败的错误信息"
+// @Router /login [post]
 func Login(c *gin.Context) {
 	var loginInfo struct {
 		Username string
@@ -69,6 +83,18 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
+// ChangePassword
+// @Summary 修改密码
+// @Description 修改用户的密码。
+// @Tags 用户
+// @Accept  json
+// @Produce  json
+// @Param   username     body    string     true        "用户名"
+// @Param   oldPassword  body    string     true        "旧密码"
+// @Param   newPassword  body    string     true        "新密码"
+// @Success 200 {object} map[string]interface{} "message:密码修改成功"
+// @Failure 400 {object} map[string]interface{} "error:错误信息"
+// @Router /changePassword [post]
 func ChangePassword(c *gin.Context) {
 	var changePasswordInfo struct {
 		Username    string

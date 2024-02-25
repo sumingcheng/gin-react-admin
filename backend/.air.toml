@@ -5,7 +5,9 @@ tmp_dir = "tmp"
 [build]
 cmd = "swag init && go build -o ./tmp/main ."
 bin = "tmp/main"
+
 exclude_dir = ["assets", "tmp", "vendor", "frontend"]
+exclude_file = ["*.tmp", "*.temp", "*.~", "*~"]
 
 [log]
 time = true

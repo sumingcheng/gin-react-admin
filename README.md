@@ -44,4 +44,3 @@
 
 通过明确这些技术在后台管理系统中的应用场景和具体实践，可以构建出一个高效、可扩展且稳定的系统架构。
 
-https://github.com/flipped-aurora/gin-vue-admin
