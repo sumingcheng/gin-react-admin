@@ -46,12 +46,12 @@ func (l *Logger) rotateLogFile() {
 		_ = l.logFile.Close() // 尝试关闭当前日志文件，忽略错误
 	}
 
-	// 获取当前工作目录
-	currentDir, err := os.Getwd()
+	execPath, err := os.Executable()
 	if err != nil {
-		log.Fatalf("获取当前目录失败: %v", err)
+		log.Fatalf("获取执行文件路径失败: %v", err)
 	}
-	logDir := filepath.Join(currentDir, "logger")
+	execDir := filepath.Dir(execPath)
+	logDir := filepath.Join(execDir, "logger") // 使用执行文件所在目录下的logger文件夹
 
 	// 确保日志目录存在
 	if _, err := os.Stat(logDir); os.IsNotExist(err) {
@@ -111,7 +111,7 @@ func (l *Logger) cleanupOldLogs() {
 	for range ticker.C {
 		execPath, _ := os.Executable()
 		execDir := filepath.Dir(execPath)
-		logDir := filepath.Join(execDir, "logs")
+		logDir := filepath.Join(execDir, "logger")
 
 		files, err := filepath.Glob(filepath.Join(logDir, "*.log"))
 		if err != nil {
