@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// LogEntry 定义日志条目的结构。
+// LogEntry 定义日志条目的结构。 可以使用 logrus 代替
 type LogEntry struct {
 	Time    string `json:"time"`    // 时间
 	Level   string `json:"level"`   // 日志级别

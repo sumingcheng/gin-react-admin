@@ -1,7 +1,7 @@
 package api
 
 import (
-	"backend/config"
+	"backend/initialize"
 	"backend/model"
 	"backend/util"
 	"github.com/gin-gonic/gin"
@@ -32,7 +32,7 @@ func Register(c *gin.Context) {
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(newUser.Password), bcrypt.DefaultCost)
 	newUser.Password = string(hashedPassword)
 
-	db := config.ConnectDatabase()
+	db, _ := initialize.GetDB()
 	result := db.Create(&newUser)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
@@ -64,7 +64,7 @@ func Login(c *gin.Context) {
 	}
 
 	// 在数据库中查找用户
-	db := config.ConnectDatabase()
+	db, _ := initialize.GetDB()
 	var user model.User
 	if err := db.Where("username = ?", loginInfo.Username).First(&user).Error; err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed"})
