@@ -9,6 +9,15 @@ import (
 	"net/http"
 )
 
+// Register @Summary 注册新用户
+// @Description 添加一个新用户到系统中
+// @Tags 用户
+// @Accept  json
+// @Produce  json
+// @Param   username     body    string     true        "用户名"
+// @Param   password     body    string     true        "密码"
+// @Success 200 {object} map[string]interface{} "成功注册用户"
+// @Router /register [post]
 func Register(c *gin.Context) {
 	var newUser model.User
 	if err := c.ShouldBindJSON(&newUser); err != nil {

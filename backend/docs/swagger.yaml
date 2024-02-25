@@ -1,0 +1,32 @@
+info:
+  contact: {}
+paths:
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: 添加一个新用户到系统中
+      parameters:
+      - description: 用户名
+        in: body
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: 密码
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功注册用户
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - 用户
+swagger: "2.0"
