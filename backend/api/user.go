@@ -10,13 +10,13 @@ import (
 )
 
 // Register @Summary 注册新用户
-// @Description 添加一个新用户到系统中
+// @Description 用户注册。
 // @Tags 用户
 // @Accept  json
 // @Produce  json
-// @Param   username     body    string     true        "用户名"
-// @Param   password     body    string     true        "密码"
-// @Success 200 {object} map[string]interface{} "成功注册用户"
+// @Param   user     body    model.User     true        "用户信息"
+// @Success 200 {object} map[string]interface{} "message:注册成功"
+// @Failure 400 {object} map[string]interface{} "error:错误信息"
 // @Router /register [post]
 func Register(c *gin.Context) {
 	var newUser model.User

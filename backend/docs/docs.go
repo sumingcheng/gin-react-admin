@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/register": {
             "post": {
-                "description": "添加一个新用户到系统中",
+                "description": "用户注册。需要提供用户名和密码。",
                 "consumes": [
                     "application/json"
                 ],
@@ -29,27 +29,25 @@ const docTemplate = `{
                 ],
                 "parameters": [
                     {
-                        "description": "用户名",
-                        "name": "username",
+                        "description": "用户信息",
+                        "name": "user",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "密码",
-                        "name": "password",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/model.User"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "成功注册用户",
+                        "description": "message:注册成功",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "error:错误信息",
                         "schema": {
                             "type": "object",
                             "additionalProperties": true
@@ -57,6 +55,11 @@ const docTemplate = `{
                     }
                 }
             }
+        }
+    },
+    "definitions": {
+        "model.User": {
+            "type": "object"
         }
     }
 }`
